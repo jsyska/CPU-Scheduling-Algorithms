@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +37,7 @@ public class ChartsController implements Initializable {
     @FXML
     public void goBack(ActionEvent event){
         try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("sample.fxml"));
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("assets/sample.fxml"));
             Scene tableViewScene = new Scene(tableViewParent);
             //get the stage information
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

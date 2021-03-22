@@ -1,11 +1,11 @@
-package sample;
+package algorithms;
 
 public class Rotational {
 
-    public static void findWaitingTime(Process[] processes, int waitingTime[], int quantum, int[] turnAroundTime){
+    public static void findWaitingTime(Process[] processes, int[] waitingTime, int quantum, int[] turnAroundTime){
         int n = processes.length;
-        int remainingBurstTime[] = new int[n];
-        int completedTime[] = new int[n];
+        int[] remainingBurstTime = new int[n];
+        int[] completedTime = new int[n];
         for (int i =0; i<n;i++)
             remainingBurstTime[i] = processes[i].getBurstTime();
 
@@ -43,7 +43,7 @@ public class Rotational {
                     }
                 }
             }
-            if(done == true)
+            if(done)
                 break;
         }
 
@@ -54,7 +54,7 @@ public class Rotational {
 
     public static double findAvgWaitingTime(Process[] processes, int quantum){
         int n = processes.length;
-        int waitingTime[] = new int[n];
+        int[] waitingTime = new int[n];
         int[] turnAroundTime = new int[n];
         int totalWaitingTime = 0;
 
@@ -69,7 +69,7 @@ public class Rotational {
 
     public static double findAvgTurnaAroundTime(Process[] processes, int quantum){
         int n = processes.length;
-        int waitingTime[] = new int[n];
+        int[] waitingTime = new int[n];
         int[] turnAroundTime = new int[n];
 
         int totalTurnAroundTime = 0;
@@ -83,31 +83,5 @@ public class Rotational {
         return (double)totalTurnAroundTime/(double)n;
     }
 
-//    private int calculateTimeQuantum(Process[] processes){
-//        int max = processes[0].getBurstTime();
-//        int min = processes[0].getArrivalTime();
-//        int totalBT = processes[0].getBurstTime();
-//        for(int i=1; i<processes.length; i++){
-//            totalBT += processes[i].getBurstTime();
-//            if(max<processes[i]){
-//                max = this.processList.get(i).getBurstTime();
-//            }
-//            else if(min>this.processList.get(i).getBurstTime()){
-//                min = this.processList.get(i).getBurstTime();
-//            }
-//        }
-//
-//        double c = (max-min)/2;
-//        double z = (totalBT)/5;
-//        int C = (int)(Math.ceil(c));
-//        int Z = (int)(Math.ceil(z));
-//
-//        if (C<=Z && C!=0){
-//            return C;
-//        }
-//        else{
-//            return Z;
-//        }
-//    }
 
 }

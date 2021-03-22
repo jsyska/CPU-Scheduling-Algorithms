@@ -1,6 +1,5 @@
-package sample;
-
-
+import algorithms.*;
+import algorithms.Process;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,7 +92,7 @@ public class Controller implements Initializable {
 
     @FXML
     void generateData(ActionEvent event) {
-        processes = Scheduling.generateProcesses(Integer.valueOf(numberOfProcesses.getText().strip()),Integer.valueOf(arrivalTime.getText().strip()),Integer.valueOf(burstTime.getText().strip()));
+        processes = Process.generateProcesses(Integer.valueOf(numberOfProcesses.getText().strip()),Integer.valueOf(arrivalTime.getText().strip()),Integer.valueOf(burstTime.getText().strip()));
         for(Process p: processes){
             table.getItems().add(p);
         }
@@ -104,7 +103,7 @@ public class Controller implements Initializable {
     //Change the scene
     public void changeScene(ActionEvent event){
         try {
-            Parent tableViewParent = FXMLLoader.load(getClass().getResource("Charts.fxml"));
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("assets/Charts.fxml"));
             Scene tableViewScene = new Scene(tableViewParent);
             //get the stage information
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -118,7 +117,16 @@ public class Controller implements Initializable {
     }
 
     public void calculate(ActionEvent event){
-        int quantum = Integer.valueOf(timeQuantum.getText().strip());
+        int quantum;
+        try{
+            quantum = Integer.valueOf(timeQuantum.getText().strip());
+        }catch (NumberFormatException e){
+//            int n = processes.length;
+//            int index = (int) round((double)n*0.8,0);
+//            quantum = processes[index].getBurstTime();
+            quantum=calculateTimeQuantum(processes);
+        }
+      //  int quantum = Integer.valueOf(timeQuantum.getText().strip());
 
         FCFS.calculateWaitingTime(processes);
         fcfsAverageWaitingTime = round(FCFS.getAverageWaitingTime(),3);
@@ -195,6 +203,33 @@ public class Controller implements Initializable {
 
     public static double getRotAverageTurnAroundTime() {
         return rotAverageTurnAroundTime;
+    }
+
+        private int calculateTimeQuantum(Process[] processes){
+        int max = processes[0].getBurstTime();
+        int min = processes[0].getArrivalTime();
+        int totalBT = processes[0].getBurstTime();
+        for(int i=1; i<processes.length; i++){
+            totalBT += processes[i].getBurstTime();
+            if(max<processes[i].getBurstTime()){
+                max = processes[i].getBurstTime();
+            }
+            else if(min>processes[i].getBurstTime()){
+                min = processes[i].getBurstTime();
+            }
+        }
+
+        double c = (max-min)/2;
+        double z = (totalBT)/5;
+        int C = (int)(Math.ceil(c));
+        int Z = (int)(Math.ceil(z));
+
+        if (C<=Z && C!=0){
+            return C;
+        }
+        else{
+            return Z;
+        }
     }
 
 }
