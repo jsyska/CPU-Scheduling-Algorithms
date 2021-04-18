@@ -14,7 +14,9 @@ Important CPU scheduling Terminologies
 
 **Burst Time/Execution Time:** It is a time required by the process to
 complete execution. It is also called running time.\
+
 **Arrival Time:** when a process enters in a ready state\
+
 **Turn Around Time:** Turnaround time is the total amount of time spent
 by the process from coming in the ready state for the first time to its
 completion.
