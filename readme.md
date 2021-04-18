@@ -27,13 +27,16 @@ First Come First Serve is the full form of FCFS. It is the easiest and
 most simple CPU scheduling algorithm. In this type of algorithm, the
 process which requests the CPU gets the CPU allocation first. This
 scheduling method can be managed with a FIFO queue.
-\ **2. Shortest Job First (SJF)**
+
+**2. Shortest Job First (SJF)**\
 Process which have the shortest burst time are scheduled first.If two
 processes have the same bust time then FCFS is used to break the tie
-\ **3. Rotational Algorithm**:\
+
+**3. Rotational Algorithm:**\
 Each process is assigned a fixed time(Time Quantum/Time Slice) in cyclic
 way. It is designed especially for the time-sharing system.
-\ **4. Pre-emptive Shortest Job First**\
+
+**4. Pre-emptive Shortest Job First**\
 Jobs are put into the ready queue as they come. A process with shortest
 burst time begins execution. If a process with even a shorter burst time
 arrives, the current process is removed or preempted from execution, and
